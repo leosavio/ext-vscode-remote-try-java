@@ -1,4 +1,4 @@
-#/bin/bash
+sfs#/bin/bash
 
 DATESTAMP=$(date +%Y%m%d-%H%M%S)
 

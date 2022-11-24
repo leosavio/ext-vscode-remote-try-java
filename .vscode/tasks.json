@@ -19,6 +19,47 @@
 					"endsPattern": "^.*Listening for transport dt_socket at address.*"
 				}
 			}],
-		}
+		},
+		{
+            "label": "dockerCleanContainers",
+            "type": "shell",
+            "command": "docker rm -v $(docker container ls -a -q)",
+            "problemMatcher": []
+        },
+		{
+            "label": "dockerBuild",
+            "type": "shell",
+            "command": "mvn install",
+			//"dependsOn": "dockerCleanContainers",
+            "problemMatcher": []
+        },
+		{
+            "label": "dockerRun",
+            "type": "shell",
+            "command": "docker build -t java_gitpod .",
+			"dependsOn": "dockerBuild",
+            "problemMatcher": []
+        },
+		{
+            "label": "dockerDebug",
+            "type": "shell",
+            "command": "docker run -p 8080:8080 -p 5005:5005 -t java_gitpod -d",
+            "dependsOn": "dockerRun",
+			"isBackground": true,
+			"problemMatcher": [{
+				"pattern": [{
+					"regexp": "\\b\\B",
+					"file": 1,
+					"location": 2,
+					"message": 3
+				}],
+				"background": {
+					"activeOnStart": true,
+					"beginsPattern": "^.*Attaching agents:.*",
+					"endsPattern": "^.*Listening for transport dt_socket at address.*"
+				}
+			}],
+        },
+		
 	]
 }

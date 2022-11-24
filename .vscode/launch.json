@@ -3,11 +3,19 @@
         
         {
             "type": "java",
-            "name": "Debug (Attach)",
+            "name": "Debug Java (Attach)",
             "request": "attach",
             "hostName": "localhost",
             "port": 5005,
             "preLaunchTask": "mvnDebug"
+        },
+        {
+            "type": "java",
+            "name": "Debug Docker Java (Attach)",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005,
+            "preLaunchTask": "dockerDebug"
         }
     ]
 }
